@@ -2,15 +2,15 @@
 	box-sizing: border-box;
 }
 html, input {
-    font-family: "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-family: "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 html {
     -ms-text-size-adjust: none;
 }
 body {
     margin: 1.5em;
-    background: #272727;
-    color: #ecf0f0;
+    background: #1E7C76;
+    color: #fff;
 }
 header {
 	margin: 0 100px 4em 0;
@@ -29,14 +29,14 @@ h2 {
 	text-transform: uppercase;
 }
 a, .fa-twitter {
-	color: #55acee;
+	color: #75B282;
 }
 img {
 	border: 0;
 }
 p, footer {
 	margin: 1em 0 .5em;
-	color: silver;
+	color: #A0CD88;
 }
 footer {
 	font-size: .8em;
@@ -254,7 +254,7 @@ svg {
 	.tweet {
 		width: 250px;
 	}
-}	
+}
 @media only screen and (max-width: 900px) {
 	h1 {
 		font-size: 2.4em;
@@ -269,7 +269,7 @@ svg {
 	.tweet {
 		width: 230px;
 	}
-}	
+}
 @media only screen and (max-width: 800px) {
 	h1 {
 		font-size: 2em;

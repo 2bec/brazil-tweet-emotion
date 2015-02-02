@@ -17,7 +17,7 @@
 			button.value = 'Stop me!';
 			isRunning = true;
 		}
-		
+
 	}, false);
 
 
@@ -59,35 +59,35 @@
 	};
 
 	var positiveWords = [
-		 'excellent', 'amazing', 'beautiful', 'nice', 'marvelous', 'magnificent', 'fabulous', 'astonishing', 'fantastic', 'peaceful', 'fortunate', 
-		 'brilliant', 'glorious', 'cheerful', 'gracious', 'grateful', 'splendid', 'superb', 'honorable', 'thankful', 'inspirational',
-		 'ecstatic', 'victorious', 'virtuous', 'proud', 'wonderful', 'lovely', 'delightful'
+		 'excelente', 'sensacional', 'lindo', 'irado', 'magnífico', 'fabuloso', 'fantástico', 'pacífico',
+		 'brilhante', 'glorioso', 'gracioso', 'esplêndido', 'honrável', 'inspirável',
+		 'virtuouso', 'orgulhoso', 'maravilhoso', 'amável'
 	];
 	var happyWords = [
-		'happy', 'lucky', 'awesome', 'excited', 'fun', 'amusing', 'amused', 'pleasant', 'pleasing', 'glad', 'enjoy',
-		'jolly', 'delightful', 'joyful', 'joyous', ':-)', ':)', ':-D', ':D', '=)','☺'
+		'feliz', 'sorte', 'animado', 'legal', 'aproveite',
+		'abençoado', ':-)', ':)', ':-D', ':D', '=)','☺'
 	];
 	var lovelyWords = [
-		'love', 'adore', 'blissful', 'heartfelt', 'loving', 'lovable', 'sweetheart', 'darling', 'kawaii', 'married', 'engaged'
+		'amor', 'adoro', 'amando', 'amável', 'querida', 'casado', 'noivo', 'noiva', 'casada'
 	];
 	var negativeWords = [
-		'unhappy', 'bad', 'sorry', 'annoyed', 'dislike', 'anxious', 'ashamed', 'cranky', 'crap', 'crappy', 'envy', 
-		'awful', 'bored', 'boring', 'bothersome', 'bummed', 'burned', 'chaotic', 'defeated', 'devastated', 'stressed',
-		'disconnected', 'discouraged', 'dishonest', 'doomed', 'dreadful', 'embarrassed', 'evicted', 'freaked out', 'frustrated', 'stupid',
-		'guilty', 'hopeless', 'horrible', 'horrified', 'humiliated', 'ignorant', 'inhumane', 'cruel', 'insane', 'insecure',
-		'nervous', 'offended', 'oppressed', 'overwhelmed', 'pathetic', 'powerless', 'poor', 'resentful', 'robbed', 'screwed'
+		'infeliz', 'ruim', 'desculpe', 'noiado', 'não curto', 'ansioso', 'envergonhado', 'quebrado', 'bosta', 'maldoso',
+		'horrível', 'entediado', 'tédio', 'queimado', 'caótico', 'derrotado', 'devastado', 'estressado',
+		'disconectado', 'desencorajado', 'desonesto', 'embaraçado', 'louco', 'frustrado', 'estúpido',
+		'culpado', 'sem esperança', 'horrível', 'humilhado', 'ignorante', 'desumano', 'cruel', 'insano', 'inseguro',
+		'nervoso', 'ofendido', 'oprimido', 'patético', 'pobre', 'ferrado'
 	];
 	var sadWords = [
-		'sad', 'alone', 'anxious', 'depressed', 'disappointed', 'disappointing', 'sigh', 'sobbing', 'crying', 'cried', 
-		'dumped', 'heartbroken', 'helpless', 'hurt', 'miserable', 'misunderstood', 'suicidal', ':-(', ':(', '=(', ';('
+		'triste', 'sozinho', 'ansioso', 'deprimido', 'desapontado', 'desapontador', 'aff', 'chorando', 'chorei',
+		'sem esperança', 'ferido', 'miserável', 'ninguém entende', 'suicida', ':-(', ':(', '=(', ';('
 	];
 	var angryWords = [
-		'hate', 'damn', 'angry', 'betrayed', 'bitched','disgust', 'disturbed', 'furious', 'harassed', 'hateful', 'hostile', 'insulted',
-		'irritable', 'jealous', ' rage ', 'pissed'
+		'ódio', 'merda', 'raiva', 'traído', 'nojo', 'perturbado', 'furioso', 'assediado', 'odioso', 'hostil', 'insultado',
+		'irritável', 'ciúme', 'puto'
 
 	];
 	var sickWords = [
-		'sick', ' ill ', 'under weather', 'throw up', 'threw up', 'throwing up', 'puke', 'puking', 'pain', 'hangover', 'intoxicated'
+		'doente', 'sem clima', 'vomitei', 'vomitando', 'vômito', 'vomitando', 'dor', 'ressaca', 'chapado'
 	];
 
 
@@ -112,12 +112,12 @@
 
 	var g = svg.append('g');
 
-	d3.json('json/us-states.json', function(error, topology) {
+	d3.json('json/br-states.json', function(error, topology) {
 	    g.selectAll('path')
-			.data(topojson.feature(topology, topology.objects.usStates).features)
+			.data(topojson.feature(topology, topology.objects.states).features)
 			.enter()
 			.append('path')
-			.attr('class', function(d){ return 'states ' + d.properties.STATE_ABBR;} )
+			.attr('class', function(d){ return 'states ' + d.properties.name;} )
 			.attr('d', path)
 			.attr('fill', function(d, i) { return color(i); });
 	});
@@ -128,7 +128,6 @@
 	/* PubNub */
 
 	var channel = 'pubnub-twitter';
-
 	var pubnub = PUBNUB.init({
 		subscribe_key: 'sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe'
 	});
@@ -143,7 +142,6 @@
 	    		getStreamData();
 	    	},
 	    	error: function(error) {
-	    		console.log(error);
 	    		if(error) {
 	    			getStreamData();
 	    		}
@@ -183,13 +181,12 @@
 		var t = (date.getHours() > 12) ? date.getHours()-12 + ':' + date.getMinutes() + ' PM' : date.getHours() + ':' + date.getMinutes() +' AM;';
 
 		userInfo.timestamp = t + ' - ' + d;
-	
-		console.log(userInfo.tweet);
+
 		callback(userInfo);
 	}
 
-	function insertLinks(text) {            
-        return text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url){return '<a href="'+url+'" >'+url+'</a>';});                      
+	function insertLinks(text) {
+        return text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url){return '<a href="'+url+'" >'+url+'</a>';});
     }
 
 	function displayData(data, emotion) {
@@ -207,7 +204,7 @@
 			document.querySelector('.reply').href ='https://twitter.com/intent/tweet?in_reply_to=' + user.id_str;
 			document.querySelector('.retweet').href = 'https://twitter.com/intent/retweet?tweet_id=' + user.id_str;
 			document.querySelector('.favorite').href = 'https://twitter.com/intent/favorite?tweet_id=' + user.id_str;
-			
+
 			document.querySelector('.tweet').style.opacity = 0.9;
 
 			if(document.querySelector('.'+user.state)) {
@@ -215,11 +212,11 @@
 				tally[user.state][emotion.type] = (tally[user.state][emotion.type] || 0) + 1;
 
 				var stateEl = document.querySelector('.'+user.state);
-				stateEl.style.fill = (tally[user.state].positive > tally[user.state].negative) ? positiveColor : ((tally[user.state].positive < tally[user.state].negative) ? negativeColor :neutralColor); 
+				stateEl.style.fill = (tally[user.state].positive > tally[user.state].negative) ? positiveColor : ((tally[user.state].positive < tally[user.state].negative) ? negativeColor :neutralColor);
 
 				stateEl.setAttribute('data-positive', tally[user.state].positive);
 				stateEl.setAttribute('data-negative', tally[user.state].negative);
-			}	
+			}
 
 			// Place emotion icons
 
@@ -235,9 +232,8 @@
 	}
 
 	function processData(data) {
-		if(!data || !data.place || !data.lang) return; 
-		if(data.place.country_code !== 'US') return;
-		//if(data.lang !== 'en') return;
+		if(!data || !data.place || !data.lang) return;
+		if(data.place.country_code !== 'BR') return;
 
 		if (positiveWords.some(function(v) { return data.text.toLowerCase().indexOf(v) > 0; })) {
 			displayData(data, positive);
@@ -257,5 +253,5 @@
 	}
 
 	getData();
-	
+
 })();
