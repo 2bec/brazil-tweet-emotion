@@ -59,17 +59,16 @@
 	};
 
 	var positiveWords = [
-		 'excelente', 'sensacional', 'lindo', 'irado', 'magnífico', 'fabuloso', 'fantástico',
+		 'excelente', 'sensacional', 'lindo', 'magnífico', 'fabuloso', 'fantástico',
          'pacífico', 'brilhante', 'glorioso', 'gracioso', 'esplêndido', 'honrável', 'inspirável',
 		 'virtuouso', 'orgulhoso', 'maravilhoso', 'amável'
 	];
 	var happyWords = [
-		'feliz', 'sorte', 'animado', 'legal', 'aproveite',
-		'abençoado', ':-)', ':)', ':-D', ':D', '=)','☺'
+		'feliz', 'sorte', 'animado', 'legal', 'abençoado', ':-)', ':)', ':-D', ':D', '=)','☺'
 	];
 	var lovelyWords = [
 		'amor', 'adoro', 'amando', 'amável', 'querida', 'casado', 'noivo', 'noiva', 'casada',
-        'sensa', 'lindo'
+        'sensa', 'lindo', 'te amo'
 	];
 	var negativeWords = [
 		'infeliz', 'ruim', 'desculpe', 'noiado', 'não curto', 'ansioso', 'envergonhado',
@@ -89,8 +88,8 @@
 
 	];
 	var sickWords = [
-		'doente', 'sem clima', 'vomitei', 'vomitando', 'vômito', 'vomitando', 'dor', 'ressaca',
-        'chapado'
+		'doente', 'vomitei', 'vomitando', 'vômito', 'vomitando', 'dor', 'ressaca',
+        'chapado', 'febre', 'colica', 'dor de cabeça'
 	];
 
 
