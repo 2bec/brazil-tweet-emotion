@@ -1,5 +1,6 @@
-(function() {
-	/* UI Components */
+(function(){
+    'use scrict';
+    /* UI Components */
 
 	var isRunning = true;
 	var button = document.getElementById('toggle');
@@ -24,8 +25,8 @@
 
 	var tally = {};
 
-	var positiveColor = '#FF8586';
-	var negativeColor = '#63A69F';
+	var negativeColor = '#FF8586';
+	var positiveColor = '#63A69F';
 	var neutralColor = '#DECEB3';
 
 	var positive = {
@@ -58,8 +59,8 @@
 	};
 
 	var positiveWords = [
-		 'excelente', 'sensacional', 'lindo', 'irado', 'magnífico', 'fabuloso', 'fantástico', 'pacífico',
-		 'brilhante', 'glorioso', 'gracioso', 'esplêndido', 'honrável', 'inspirável',
+		 'excelente', 'sensacional', 'lindo', 'irado', 'magnífico', 'fabuloso', 'fantástico',
+         'pacífico', 'brilhante', 'glorioso', 'gracioso', 'esplêndido', 'honrável', 'inspirável',
 		 'virtuouso', 'orgulhoso', 'maravilhoso', 'amável'
 	];
 	var happyWords = [
@@ -67,26 +68,29 @@
 		'abençoado', ':-)', ':)', ':-D', ':D', '=)','☺'
 	];
 	var lovelyWords = [
-		'amor', 'adoro', 'amando', 'amável', 'querida', 'casado', 'noivo', 'noiva', 'casada', 'sensa'
+		'amor', 'adoro', 'amando', 'amável', 'querida', 'casado', 'noivo', 'noiva', 'casada',
+        'sensa', 'lindo'
 	];
 	var negativeWords = [
-		'infeliz', 'ruim', 'desculpe', 'noiado', 'não curto', 'ansioso', 'envergonhado', 'quebrado', 'bosta', 'maldoso',
-		'horrível', 'entediado', 'tédio', 'queimado', 'caótico', 'derrotado', 'devastado', 'estressado',
-		'disconectado', 'desencorajado', 'desonesto', 'embaraçado', 'louco', 'frustrado', 'estúpido',
-		'culpado', 'sem esperança', 'horrível', 'humilhado', 'ignorante', 'desumano', 'cruel', 'insano', 'inseguro',
-		'nervoso', 'ofendido', 'oprimido', 'patético', 'pobre', 'ferrado', 'sqn'
+		'infeliz', 'ruim', 'desculpe', 'noiado', 'não curto', 'ansioso', 'envergonhado',
+        'quebrado', 'bosta', 'maldoso', 'horrível', 'entediado', 'tédio', 'queimado', 'caótico',
+        'derrotado', 'devastado', 'estressado', 'desconectado', 'desencorajado', 'desonesto',
+        'embaraçado', 'louco', 'frustrado', 'estúpido', 'culpado', 'sem esperança', 'horrível',
+        'humilhado', 'ignorante', 'desumano', 'cruel', 'insano', 'inseguro', 'nervoso',
+        'ofendido', 'oprimido', 'patético', 'pobre', 'ferrado', 'sqn'
 	];
 	var sadWords = [
-		'triste', 'sozinho', 'ansioso', 'deprimido', 'desapontado', 'desapontador', 'aff', 'chorando', 'chorei',
-		'sem esperança', 'ferido', 'miserável', 'ninguém entende', 'suicida', ':-(', ':(', '=(', ';('
+		'triste', 'sozinho', 'ansioso', 'deprimido', 'desapontado', 'desapontador', 'aff', 'chorando', 'chorei', 'sozinho', 'cabisbaixo', 'sensível', 'sem esperança', 'ferido', 'miserável',
+        'ninguém entende', 'suicida', ':-(', ':(', '=(', ';('
 	];
 	var angryWords = [
 		'ódio', 'merda', 'raiva', 'traído', 'nojo', 'perturbado', 'furioso', 'assediado', 'odioso', 'hostil', 'insultado',
-		'irritável', 'ciúme', 'puto'
+		'irritável', 'ciúme', 'puto', 'irado'
 
 	];
 	var sickWords = [
-		'doente', 'sem clima', 'vomitei', 'vomitando', 'vômito', 'vomitando', 'dor', 'ressaca', 'chapado'
+		'doente', 'sem clima', 'vomitei', 'vomitando', 'vômito', 'vomitando', 'dor', 'ressaca',
+        'chapado'
 	];
 
 
@@ -97,7 +101,7 @@
 
 	var color = d3.scale.linear().domain([0, 15])
         .range(['#5b5858', '#4f4d4d', '#454444', '#323131'])
-        .interpolate(d3.interpolateHcl);
+        //.interpolate(d3.interpolateHcl);
 
 
 	var svg = d3.select('#map').append('svg')
@@ -186,8 +190,49 @@
         return text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url){return '<a href="'+url+'" >'+url+'</a>';});
     }
 
-	function displayData(data, emotion) {
+    function getStatePrefix(state) {
+        state = state.toString().toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '');
 
+        if (state === 'brasil') return;
+
+        states = {
+            'acre': 'AC',
+            'alagoas': 'AL',
+            'amap': 'AP',
+            'amazonas': 'AM',
+            'bahia': 'BA',
+            'cear': 'CE',
+            'distrito-federal': 'DF',
+            'esprito-santo': 'ES',
+            'gois': 'GO',
+            'maranho': 'MA',
+            'mato-grosso': 'MT',
+            'mato-grosso-do-sul': 'MS',
+            'minas-gerais': 'MG',
+            'par': 'PA',
+            'paraba': 'PB',
+            'paran': 'PR',
+            'pernambuco': 'PE',
+            'piau': 'PI',
+            'rio-de-janeiro': 'RJ',
+            'rio-grande-do-norte': 'RN',
+            'rio-grande-do-sul': 'RS',
+            'rondnia': 'RO',
+            'roraima': 'RR',
+            'santa-catarina': 'SC',
+            'so-paulo': 'SP',
+            'sergipe': 'SE',
+            'tocantins': 'TO'
+        };
+        return states[state];
+    }
+
+	function displayData(data, emotion) {
 		getUserInfo(data, function(user){
 			document.querySelector('.emotion').style.backgroundImage = 'url(images/'+ emotion.icon +')';
 
@@ -203,12 +248,12 @@
 			document.querySelector('.favorite').href = 'https://twitter.com/intent/favorite?tweet_id=' + user.id_str;
 
 			document.querySelector('.tweet').style.opacity = 0.9;
-
-			if(document.querySelector('.'+user.state)) {
+            var stateSelector = getStatePrefix(user.state);
+            if (stateSelector && document.querySelector('.' + stateSelector)) {
 				tally[user.state] = (tally[user.state] || {positive: 0, negative: 0});
 				tally[user.state][emotion.type] = (tally[user.state][emotion.type] || 0) + 1;
 
-				var stateEl = document.querySelector('.'+user.state);
+				var stateEl = document.querySelector('.'+stateSelector);
 				stateEl.style.fill = (tally[user.state].positive > tally[user.state].negative) ? positiveColor : ((tally[user.state].positive < tally[user.state].negative) ? negativeColor :neutralColor);
 
 				stateEl.setAttribute('data-positive', tally[user.state].positive);
@@ -248,6 +293,5 @@
 			displayData(data, sick);
 		}
 	}
-
 	getData();
 })();
