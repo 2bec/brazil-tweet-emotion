@@ -1,5 +1,4 @@
 (function() {
-
 	/* UI Components */
 
 	var isRunning = true;
@@ -10,11 +9,11 @@
 			pubnub.unsubscribe({
 				channel: channel
 			});
-			button.value = 'Stream again';
+			button.value = 'Continuar';
 			isRunning = false;
 		} else {
 			getData();
-			button.value = 'Stop me!';
+			button.value = 'Pausar';
 			isRunning = true;
 		}
 
@@ -68,14 +67,14 @@
 		'abençoado', ':-)', ':)', ':-D', ':D', '=)','☺'
 	];
 	var lovelyWords = [
-		'amor', 'adoro', 'amando', 'amável', 'querida', 'casado', 'noivo', 'noiva', 'casada'
+		'amor', 'adoro', 'amando', 'amável', 'querida', 'casado', 'noivo', 'noiva', 'casada', 'sensa'
 	];
 	var negativeWords = [
 		'infeliz', 'ruim', 'desculpe', 'noiado', 'não curto', 'ansioso', 'envergonhado', 'quebrado', 'bosta', 'maldoso',
 		'horrível', 'entediado', 'tédio', 'queimado', 'caótico', 'derrotado', 'devastado', 'estressado',
 		'disconectado', 'desencorajado', 'desonesto', 'embaraçado', 'louco', 'frustrado', 'estúpido',
 		'culpado', 'sem esperança', 'horrível', 'humilhado', 'ignorante', 'desumano', 'cruel', 'insano', 'inseguro',
-		'nervoso', 'ofendido', 'oprimido', 'patético', 'pobre', 'ferrado'
+		'nervoso', 'ofendido', 'oprimido', 'patético', 'pobre', 'ferrado', 'sqn'
 	];
 	var sadWords = [
 		'triste', 'sozinho', 'ansioso', 'deprimido', 'desapontado', 'desapontador', 'aff', 'chorando', 'chorei',
@@ -93,28 +92,27 @@
 
 	/* D3  */
 
-	var width = 900;
-	var height = 540;
+	var width = 800;
+	var height = 700;
 
-	var projection = d3.geo.albersUsa();
-		//.scale(900);
+	var color = d3.scale.linear().domain([0, 15])
+        .range(['#5b5858', '#4f4d4d', '#454444', '#323131'])
+        .interpolate(d3.interpolateHcl);
 
-	var color = d3.scale.linear()
-		.domain([0, 15])
-		.range(['#5b5858', '#4f4d4d', '#454444', '#323131']);
 
 	var svg = d3.select('#map').append('svg')
 			.attr('width', width)
 			.attr('height', height);
 
-	var path = d3.geo.path()
-	    .projection(projection);
-
 	var g = svg.append('g');
+    var scale = 900;
+    var projection = d3.geo.mercator().center([-50, -10]).scale(scale);
+    var path = d3.geo.path().projection(projection);
 
-	d3.json('json/br-states.json', function(error, topology) {
+	d3.json('json/br-states.json', function(error, br) {
+        var units = topojson.feature(br, br.objects.states);
 	    g.selectAll('path')
-			.data(topojson.feature(topology, topology.objects.states).features)
+			.data(units.features)
 			.enter()
 			.append('path')
 			.attr('class', function(d){ return 'states ' + d.properties.name;} )
@@ -124,8 +122,7 @@
 
 	var faceIcon = svg.selectAll('image').data([0]);
 
-
-	/* PubNub */
+    /* PubNub */
 
 	var channel = 'pubnub-twitter';
 	var pubnub = PUBNUB.init({
@@ -253,5 +250,4 @@
 	}
 
 	getData();
-
 })();

@@ -168,10 +168,10 @@ ul {
 	display: inline-block;
 	margin-right: 5px;
 	border-radius: 50%;
-	background-color: #FF8586;
+	background-color: #63A69F;
 }
 .legendbox li div.sad {
-	background-color: #63A69F;
+	background-color: #FF8586;
 }
 .legendbox li div.neutral {
 	background-color: #DECEB3;
