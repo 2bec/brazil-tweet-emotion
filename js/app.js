@@ -61,7 +61,7 @@
 	var positiveWords = [
 		 'excelente', 'sensacional', 'lindo', 'magnífico', 'fabuloso', 'fantástico',
          'pacífico', 'brilhante', 'glorioso', 'gracioso', 'esplêndido', 'honrável', 'inspirável',
-		 'virtuouso', 'orgulhoso', 'maravilhoso', 'amável'
+		 'virtuouso', 'orgulhoso', 'maravilhoso', 'amável', 'sensacional'
 	];
 	var happyWords = [
 		'feliz', 'sorte', 'animado', 'legal', 'abençoado', ':-)', ':)', ':-D', ':D', '=)','☺'
@@ -76,15 +76,15 @@
         'derrotado', 'devastado', 'estressado', 'desconectado', 'desencorajado', 'desonesto',
         'embaraçado', 'louco', 'frustrado', 'estúpido', 'culpado', 'sem esperança', 'horrível',
         'humilhado', 'ignorante', 'desumano', 'cruel', 'insano', 'inseguro', 'nervoso',
-        'ofendido', 'oprimido', 'patético', 'pobre', 'ferrado', 'sqn'
+        'ofendido', 'oprimido', 'patético', 'pobre', 'ferrado', 'sqn', 'vacilao', 'eu mato'
 	];
 	var sadWords = [
 		'triste', 'sozinho', 'ansioso', 'deprimido', 'desapontado', 'desapontador', 'aff', 'chorando', 'chorei', 'sozinho', 'cabisbaixo', 'sensível', 'sem esperança', 'ferido', 'miserável',
         'ninguém entende', 'suicida', ':-(', ':(', '=(', ';('
 	];
 	var angryWords = [
-		'ódio', 'merda', 'raiva', 'traído', 'nojo', 'perturbado', 'furioso', 'assediado', 'odioso', 'hostil', 'insultado',
-		'irritável', 'ciúme', 'puto', 'irado'
+		'ódio', 'merda', 'raiva', 'traído', 'nojo', 'perturbado', 'furioso', 'assediado', 'odioso', 'hostil', 'insultado', 'odeio', 'odio', 'safadeza', 'putaria', 'viadagem',
+		'irritável', 'ciúme', 'puto', 'irado', 'lixo', 'safado', 'trairagem',
 
 	];
 	var sickWords = [
@@ -100,7 +100,6 @@
 
 	var color = d3.scale.linear().domain([0, 15])
         .range(['#5b5858', '#4f4d4d', '#454444', '#323131'])
-        //.interpolate(d3.interpolateHcl);
 
 
 	var svg = d3.select('#map').append('svg')
